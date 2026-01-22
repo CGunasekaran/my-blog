@@ -9,35 +9,35 @@ import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   const featuredPosts = getFeaturedPosts();
-  const featuredApps = apps.filter((app) => app.featured).slice(0, 6);
+  const featuredApps = apps;
   const allPosts = getAllPosts().slice(0, 6);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main className="min-h-screen">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <ProfileSection author={authorProfile} />
       </section>
 
       {/* Featured Apps Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-20">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <section className="relative bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950 py-20">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.06]"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between mb-12">
             <div>
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-1 h-8 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></div>
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <div className="w-1 h-8 bg-gradient-to-b from-sky-500 to-violet-500 rounded-full"></div>
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-400 to-violet-400 bg-clip-text text-transparent">
                   Featured Projects
                 </h2>
               </div>
-              <p className="text-gray-600 text-lg ml-6">
+              <p className="text-slate-300 text-lg ml-6">
                 Check out my latest and greatest applications
               </p>
             </div>
             <Link
               href="/projects"
-              className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium"
+              className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-full hover:shadow-lg hover:shadow-black/30 hover:scale-105 transition-all duration-300 font-medium"
             >
               View All
               <ArrowRight className="w-5 h-5" />
@@ -46,13 +46,18 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredApps.map((app, index) => (
-              <AppShowcase key={app.id} app={app} colorIndex={index} />
+              <AppShowcase
+                key={app.id}
+                app={app}
+                colorIndex={index}
+                variant="light"
+              />
             ))}
           </div>
 
           <Link
             href="/projects"
-            className="md:hidden flex items-center justify-center gap-2 mt-8 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:shadow-lg transition-all duration-300 font-medium w-full max-w-sm mx-auto"
+            className="md:hidden flex items-center justify-center gap-2 mt-8 px-6 py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-full hover:shadow-lg hover:shadow-black/30 transition-all duration-300 font-medium w-full max-w-sm mx-auto"
           >
             View All Projects
             <ArrowRight className="w-5 h-5" />
@@ -61,19 +66,19 @@ export default function Home() {
       </section>
 
       {/* Latest Blog Posts */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-slate-100 mb-2">
               Latest Articles
             </h2>
-            <p className="text-gray-600">
+            <p className="text-slate-300">
               Insights, tutorials, and stories from my development journey
             </p>
           </div>
           <Link
             href="/blog"
-            className="hidden md:flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+            className="hidden md:flex items-center gap-2 text-sky-300 hover:text-sky-200 font-medium"
           >
             View All
             <ArrowRight className="w-5 h-5" />
@@ -87,9 +92,9 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-xl">
-            <p className="text-gray-600 mb-4">No blog posts yet.</p>
-            <p className="text-sm text-gray-500">
+          <div className="text-center py-12 bg-white/5 border border-white/10 rounded-xl">
+            <p className="text-slate-300 mb-4">No blog posts yet.</p>
+            <p className="text-sm text-slate-400">
               Stay tuned for upcoming articles about my projects!
             </p>
           </div>
@@ -100,28 +105,28 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">
+            <div className="text-4xl font-bold text-sky-400 mb-2">
               {apps.length}
             </div>
-            <div className="text-gray-600">Projects Built</div>
+            <div className="text-slate-400">Projects Built</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-purple-600 mb-2">
+            <div className="text-4xl font-bold text-violet-400 mb-2">
               {new Set(apps.flatMap((app) => app.technologies)).size}
             </div>
-            <div className="text-gray-600">Technologies</div>
+            <div className="text-slate-400">Technologies</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-green-600 mb-2">
+            <div className="text-4xl font-bold text-emerald-400 mb-2">
               {allPosts.length}
             </div>
-            <div className="text-gray-600">Blog Posts</div>
+            <div className="text-slate-400">Blog Posts</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-2">
+            <div className="text-4xl font-bold text-amber-400 mb-2">
               {apps.filter((app) => app.status === "live").length}
             </div>
-            <div className="text-gray-600">Live Apps</div>
+            <div className="text-slate-400">Live Apps</div>
           </div>
         </div>
       </section>

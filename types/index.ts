@@ -1,3 +1,5 @@
+import type { ComponentType } from "react";
+
 export interface App {
   id: string;
   name: string;
@@ -7,7 +9,7 @@ export interface App {
   technologies: string[];
   thumbnail?: string;
   favicon?: string;
-  status: 'live' | 'development';
+  status: "live" | "development";
   featured: boolean;
   createdAt: string;
   githubUrl?: string;
@@ -18,6 +20,7 @@ export interface BlogPost {
   title: string;
   description: string;
   content: string;
+  contentComponent?: ComponentType;
   appId?: string;
   coverImage?: string;
   author: Author;

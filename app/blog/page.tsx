@@ -13,38 +13,43 @@ export default function BlogPage() {
   const tags = getAllTags();
 
   // Group posts by month/year
-  const postsByDate = posts.reduce((acc, post) => {
-    const date = new Date(post.publishedAt);
-    const monthYear = date.toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-    if (!acc[monthYear]) {
-      acc[monthYear] = [];
-    }
-    acc[monthYear].push(post);
-    return acc;
-  }, {} as Record<string, typeof posts>);
+  const postsByDate = posts.reduce(
+    (acc, post) => {
+      const date = new Date(post.publishedAt);
+      const monthYear = date.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+      });
+      if (!acc[monthYear]) {
+        acc[monthYear] = [];
+      }
+      acc[monthYear].push(post);
+      return acc;
+    },
+    {} as Record<string, typeof posts>,
+  );
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+      <section className="bg-gradient-to-b from-slate-950 via-slate-900/40 to-slate-950 text-white border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="w-10 h-10" />
-            <h1 className="text-4xl md:text-5xl font-bold">Blog</h1>
+            <BookOpen className="w-10 h-10 text-slate-200" />
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-sky-300 to-violet-300 bg-clip-text text-transparent">
+              Blog
+            </h1>
           </div>
-          <p className="text-xl text-purple-100 max-w-2xl">
+          <p className="text-xl text-slate-300 max-w-2xl">
             Insights, tutorials, and stories about web development, modern
             technologies, and software engineering best practices.
           </p>
-          <div className="mt-6 flex items-center gap-4 text-purple-100">
+          <div className="mt-6 flex items-center gap-4 text-slate-300">
             <div className="flex items-center gap-2">
               <span className="text-3xl font-bold">{posts.length}</span>
               <span>Articles</span>
             </div>
-            <div className="w-px h-8 bg-purple-300"></div>
+            <div className="w-px h-8 bg-white/10"></div>
             <div className="flex items-center gap-2">
               <span className="text-3xl font-bold">{tags.length}</span>
               <span>Topics</span>
@@ -54,11 +59,11 @@ export default function BlogPage() {
       </section>
 
       {/* Tags Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8">
+      <section className="relative bg-slate-950 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-6">
-            <Tag className="w-5 h-5 text-purple-600" />
-            <h2 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <Tag className="w-5 h-5 text-violet-300" />
+            <h2 className="text-xl font-bold bg-gradient-to-r from-sky-300 to-violet-300 bg-clip-text text-transparent">
               Browse by Topic
             </h2>
           </div>
@@ -82,7 +87,7 @@ export default function BlogPage() {
                 <Link
                   key={tag}
                   href={`/blog?tag=${encodeURIComponent(tag)}`}
-                  className={`group px-5 py-2.5 bg-white rounded-full font-bold hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer relative overflow-hidden border-2`}
+                  className={`group px-5 py-2.5 bg-white/5 rounded-full font-bold hover:scale-105 transition-all duration-300 cursor-pointer relative overflow-hidden border border-white/10`}
                 >
                   <span
                     className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full`}
@@ -107,19 +112,19 @@ export default function BlogPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {posts.length === 0 ? (
           <div className="text-center py-12">
-            <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+            <BookOpen className="w-16 h-16 text-slate-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-semibold text-slate-100 mb-2">
               No posts yet
             </h3>
-            <p className="text-gray-600">
+            <p className="text-slate-300">
               Check back soon for new articles and tutorials!
             </p>
           </div>
         ) : (
           Object.entries(postsByDate).map(([monthYear, monthPosts]) => (
             <div key={monthYear} className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <span className="w-2 h-8 bg-gradient-to-b from-blue-600 to-purple-600 rounded"></span>
+              <h2 className="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-3">
+                <span className="w-2 h-8 bg-gradient-to-b from-sky-500 to-violet-500 rounded"></span>
                 {monthYear}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -133,10 +138,10 @@ export default function BlogPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="bg-slate-950 text-white border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="text-xl text-blue-100 mb-6 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-6 max-w-2xl mx-auto">
             New articles and tutorials are published regularly. Follow me on
             social media to stay connected!
           </p>
@@ -145,7 +150,7 @@ export default function BlogPage() {
               href="https://github.com/CGunasekaran"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              className="px-6 py-3 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-colors"
             >
               Follow on GitHub
             </a>
@@ -153,7 +158,7 @@ export default function BlogPage() {
               href="https://www.linkedin.com/in/gunasekaran-chinraj-7a21b063/"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 transition-colors"
+              className="px-6 py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-lg font-semibold hover:opacity-95 transition-opacity"
             >
               Connect on LinkedIn
             </a>

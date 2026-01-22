@@ -2,7 +2,7 @@
 
 import { Author } from "@/types";
 import Image from "next/image";
-import { Github, Linkedin, Globe, Mail } from "lucide-react";
+import { Github, Linkedin, Globe } from "lucide-react";
 
 interface ProfileSectionProps {
   author: Author;
@@ -10,7 +10,7 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({ author }: ProfileSectionProps) {
   return (
-    <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+    <div className="bg-gradient-to-br from-sky-500 via-violet-500 to-fuchsia-500 rounded-3xl shadow-2xl shadow-black/30 overflow-hidden border border-white/15">
       <div className="p-8 md:p-12">
         <div className="flex flex-col md:flex-row items-center gap-8">
           {/* Avatar */}
@@ -40,7 +40,7 @@ export default function ProfileSection({ author }: ProfileSectionProps) {
             <h2 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">
               {author.name}
             </h2>
-            <p className="text-blue-100 text-xl mb-4 font-semibold">
+            <p className="text-white/85 text-xl mb-4 font-semibold">
               {author.role}
             </p>
             <p className="text-white/95 text-lg mb-6 max-w-2xl leading-relaxed">
@@ -54,7 +54,7 @@ export default function ProfileSection({ author }: ProfileSectionProps) {
                   href={author.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/20 hover:bg-white hover:text-purple-600 backdrop-blur-sm rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl"
+                  className="w-12 h-12 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                   aria-label="GitHub"
                 >
                   <Github className="w-6 h-6" />
@@ -65,7 +65,7 @@ export default function ProfileSection({ author }: ProfileSectionProps) {
                   href={author.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/20 hover:bg-white hover:text-purple-600 backdrop-blur-sm rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl"
+                  className="w-12 h-12 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-6 h-6" />
@@ -76,7 +76,7 @@ export default function ProfileSection({ author }: ProfileSectionProps) {
                   href={author.social.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/20 hover:bg-white hover:text-purple-600 backdrop-blur-sm rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-xl"
+                  className="w-12 h-12 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                   aria-label="Website"
                 >
                   <Globe className="w-6 h-6" />

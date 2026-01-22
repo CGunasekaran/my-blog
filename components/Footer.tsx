@@ -5,16 +5,21 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gradient-to-b from-gray-950 to-gray-900 text-gray-300 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-9 h-9 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">G</span>
               </div>
-              <span className="font-bold text-xl text-white">Dev Blog</span>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl text-white">Dev Blog</span>
+                <span className="text-xs text-gray-400 font-medium">
+                  Portfolio + Writing
+                </span>
+              </div>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Sharing insights on web development, modern technologies, and
@@ -25,7 +30,7 @@ export default function Footer() {
                 href="https://github.com/CGunasekaran"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 hover:text-white transition-all"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5" />
@@ -34,14 +39,14 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/gunasekaran-chinraj-7a21b063/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 hover:text-white transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
                 href="mailto:gunasekaran.bsc.cs@gmail.com"
-                className="hover:text-white transition-colors"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 hover:text-white transition-all"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
@@ -134,7 +139,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
             © {currentYear} Gunasekaran. All rights reserved.
           </p>

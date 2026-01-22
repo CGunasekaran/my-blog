@@ -7,6 +7,7 @@ import { ExternalLink, Github } from "lucide-react";
 interface AppShowcaseProps {
   app: App;
   colorIndex?: number;
+  variant?: "dark" | "light";
 }
 
 const gradients = [
@@ -35,12 +36,41 @@ const textGradients = [
   "from-fuchsia-600 to-pink-600",
 ];
 
-export default function AppShowcase({ app, colorIndex = 0 }: AppShowcaseProps) {
+export default function AppShowcase({
+  app,
+  colorIndex = 0,
+  variant = "dark",
+}: AppShowcaseProps) {
   const gradient = gradients[colorIndex % gradients.length];
   const textGradient = textGradients[colorIndex % textGradients.length];
 
+  const isLight = variant === "light";
+  const containerClassName = isLight
+    ? "group bg-gradient-to-br from-white via-slate-50 to-white rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 border border-slate-200/80 hover:shadow-xl"
+    : "group bg-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 border border-white/10 hover:bg-white/10";
+
+  const categoryClassName = isLight
+    ? "text-sm text-slate-600 font-medium"
+    : "text-sm text-slate-400 font-medium";
+
+  const featuredPillClassName = isLight
+    ? "px-2 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full"
+    : "px-2 py-1 bg-amber-400/15 border border-amber-400/20 text-amber-200 text-xs font-semibold rounded-full";
+
+  const descriptionClassName = isLight
+    ? "text-slate-700 mb-4"
+    : "text-slate-300 mb-4";
+
+  const techPillClassName = isLight
+    ? "px-2 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded"
+    : "px-2 py-1 bg-white/5 border border-white/10 text-slate-200 text-xs font-medium rounded";
+
+  const codeButtonClassName = isLight
+    ? "flex items-center justify-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-800 rounded-lg hover:bg-slate-50 transition-colors font-medium"
+    : "flex items-center justify-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors font-medium";
+
   return (
-    <div className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+    <div className={containerClassName}>
       {/* Thumbnail */}
       <div
         className={`relative h-48 w-full bg-gradient-to-br ${gradient} overflow-hidden`}
@@ -85,29 +115,22 @@ export default function AppShowcase({ app, colorIndex = 0 }: AppShowcaseProps) {
               >
                 {app.name}
               </h3>
-              <span className="text-sm text-gray-500 font-medium">
-                {app.category}
-              </span>
+              <span className={categoryClassName}>{app.category}</span>
             </div>
           </div>
 
           {app.featured && (
-            <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">
-              Featured
-            </span>
+            <span className={featuredPillClassName}>Featured</span>
           )}
         </div>
 
         {/* Description */}
-        <p className="text-gray-600 mb-4">{app.description}</p>
+        <p className={descriptionClassName}>{app.description}</p>
 
         {/* Technologies */}
         <div className="flex flex-wrap gap-2 mb-4">
           {app.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded"
-            >
+            <span key={tech} className={techPillClassName}>
               {tech}
             </span>
           ))}
@@ -119,7 +142,7 @@ export default function AppShowcase({ app, colorIndex = 0 }: AppShowcaseProps) {
             href={app.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r ${gradient} text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium`}
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r ${gradient} text-white rounded-lg hover:opacity-95 transition-opacity font-medium`}
           >
             <ExternalLink className="w-4 h-4" />
             Live Demo
@@ -129,7 +152,7 @@ export default function AppShowcase({ app, colorIndex = 0 }: AppShowcaseProps) {
               href={app.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center justify-center gap-2 px-4 py-2 border-2 bg-gradient-to-r ${gradient} bg-clip-text text-transparent border-current rounded-lg hover:bg-gradient-to-r hover:${gradient} hover:text-white hover:border-transparent transition-all duration-300 font-medium`}
+              className={codeButtonClassName}
             >
               <Github className="w-4 h-4" />
               Code

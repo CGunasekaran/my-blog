@@ -1,9 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { BlogPost } from '@/types';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { BlogPost } from "@/types";
+import {
+  componentPosts,
+  getComponentPostBySlug,
+  isComponentPostSlug,
+} from "@/lib/componentPosts";
 
-const postsDirectory = path.join(process.cwd(), 'content/blog');
+const postsDirectory = path.join(process.cwd(), "content/blog");
 
 export function getAllPosts(): BlogPost[] {
   // Ensure directory exists
@@ -14,11 +19,16 @@ export function getAllPosts(): BlogPost[] {
 
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith('.mdx') || fileName.endsWith('.md'))
+    .filter((fileName) => fileName.endsWith(".mdx") || fileName.endsWith(".md"))
     .map((fileName) => {
-      const slug = fileName.replace(/\.mdx?$/, '');
+      const slug = fileName.replace(/\.mdx?$/, "");
+
+      if (isComponentPostSlug(slug)) {
+        return null;
+      }
+
       const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(fileContents);
 
       return {
@@ -35,21 +45,56 @@ export function getAllPosts(): BlogPost[] {
         readTime: calculateReadTime(content),
         featured: data.featured || false,
       } as BlogPost;
-    });
+    })
+    .filter(Boolean) as BlogPost[];
 
-  return allPostsData.sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  const mergedPosts = [...componentPosts, ...allPostsData].map((post) => {
+    if (post.readTime && post.readTime > 0) return post;
+    return {
+      ...post,
+      readTime: calculateReadTime(post.content ?? ""),
+    };
+  });
+
+  return mergedPosts.sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const normalizedSlug = slug.replace(/\.(mdx|md)$/i, "");
+
+    const componentPost = getComponentPostBySlug(normalizedSlug);
+    if (componentPost) {
+      return {
+        ...componentPost,
+        readTime:
+          componentPost.readTime && componentPost.readTime > 0
+            ? componentPost.readTime
+            : calculateReadTime(componentPost.content ?? ""),
+      };
+    }
+
+    const mdxPath = path.join(postsDirectory, `${normalizedSlug}.mdx`);
+    const mdPath = path.join(postsDirectory, `${normalizedSlug}.md`);
+
+    const fullPath = fs.existsSync(mdxPath)
+      ? mdxPath
+      : fs.existsSync(mdPath)
+        ? mdPath
+        : null;
+
+    if (!fullPath) {
+      return null;
+    }
+
+    const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
 
     return {
-      slug,
+      slug: normalizedSlug,
       title: data.title,
       description: data.description,
       content,
@@ -68,7 +113,9 @@ export function getPostBySlug(slug: string): BlogPost | null {
 }
 
 export function getFeaturedPosts(): BlogPost[] {
-  return getAllPosts().filter((post) => post.featured).slice(0, 3);
+  return getAllPosts()
+    .filter((post) => post.featured)
+    .slice(0, 3);
 }
 
 export function getPostsByTag(tag: string): BlogPost[] {

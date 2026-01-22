@@ -40,7 +40,7 @@ export default function BlogCard({ post, colorIndex = 0 }: BlogCardProps) {
   const textGradient = textGradients[colorIndex % textGradients.length];
 
   return (
-    <article className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100">
+    <article className="group bg-white/5 rounded-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-white/10 hover:bg-white/10">
       {/* Cover Image */}
       {post.coverImage && (
         <Link href={`/blog/${post.slug}`}>
@@ -87,10 +87,10 @@ export default function BlogCard({ post, colorIndex = 0 }: BlogCardProps) {
         </Link>
 
         {/* Description */}
-        <p className="text-gray-600 mb-4 line-clamp-3">{post.description}</p>
+        <p className="text-slate-300 mb-4 line-clamp-3">{post.description}</p>
 
         {/* Meta Information */}
-        <div className="flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center justify-between text-sm text-slate-400">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />

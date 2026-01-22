@@ -112,4 +112,15 @@ export const apps: App[] = [
     featured: false,
     createdAt: "2024-06-01",
   },
+  {
+    id: "dev-blog",
+    name: "Developer Blog",
+    description: "Personal blog for sharing tech articles and project insights",
+    url: "https://my-blog-mu-six-29.vercel.app/",
+    category: "Portfolio",
+    technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "MDX"],
+    status: "live",
+    featured: true,
+    createdAt: "2024-12-24",
+  },
 ];

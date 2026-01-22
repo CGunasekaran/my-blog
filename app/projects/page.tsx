@@ -16,22 +16,24 @@ export default function ProjectsPage() {
   }));
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="bg-gradient-to-b from-slate-950 via-slate-900/40 to-slate-950 text-white border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">My Projects</h1>
-          <p className="text-xl text-blue-100 max-w-2xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-sky-300 to-violet-300 bg-clip-text text-transparent">
+            My Projects
+          </h1>
+          <p className="text-xl text-slate-300 max-w-2xl">
             Explore my portfolio of web applications built with modern
             technologies. From e-commerce platforms to AI-powered tools, each
             project demonstrates my expertise in full-stack development.
           </p>
-          <div className="mt-6 flex items-center gap-4 text-blue-100">
+          <div className="mt-6 flex items-center gap-4 text-slate-300">
             <div className="flex items-center gap-2">
               <span className="text-3xl font-bold">{apps.length}</span>
               <span>Projects</span>
             </div>
-            <div className="w-px h-8 bg-blue-300"></div>
+            <div className="w-px h-8 bg-white/10"></div>
             <div className="flex items-center gap-2">
               <span className="text-3xl font-bold">{categories.length}</span>
               <span>Categories</span>
@@ -45,9 +47,9 @@ export default function ProjectsPage() {
         {appsByCategory.map(({ category, apps: categoryApps }) => (
           <div key={category} className="mb-16">
             <div className="flex items-center gap-3 mb-8">
-              <Filter className="w-6 h-6 text-blue-600" />
-              <h2 className="text-3xl font-bold text-gray-900">{category}</h2>
-              <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+              <Filter className="w-6 h-6 text-sky-300" />
+              <h2 className="text-3xl font-bold text-slate-100">{category}</h2>
+              <span className="px-3 py-1 bg-white/5 text-slate-200 border border-white/10 rounded-full text-sm font-medium">
                 {categoryApps.length}
               </span>
             </div>
@@ -61,18 +63,18 @@ export default function ProjectsPage() {
       </section>
 
       {/* Tech Stack Summary */}
-      <section className="relative bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <section className="relative bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950 py-16 overflow-hidden border-t border-white/10">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.06]"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="w-1 h-8 bg-gradient-to-b from-indigo-600 to-purple-600 rounded-full"></div>
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="w-1 h-8 bg-gradient-to-b from-sky-500 to-violet-500 rounded-full"></div>
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-300 to-violet-300 bg-clip-text text-transparent">
                 Technologies Used
               </h2>
-              <div className="w-1 h-8 bg-gradient-to-b from-indigo-600 to-purple-600 rounded-full"></div>
+              <div className="w-1 h-8 bg-gradient-to-b from-sky-500 to-violet-500 rounded-full"></div>
             </div>
-            <p className="text-gray-600 text-lg">
+            <p className="text-slate-300 text-lg">
               The tech stack powering my projects
             </p>
           </div>
@@ -96,7 +98,7 @@ export default function ProjectsPage() {
                 return (
                   <span
                     key={tech}
-                    className={`group px-6 py-3 bg-white rounded-full font-bold hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer relative overflow-hidden border-2`}
+                    className={`group px-6 py-3 bg-white/5 rounded-full font-bold hover:scale-105 transition-all duration-300 cursor-pointer relative overflow-hidden border border-white/10`}
                     style={{
                       borderImage: `linear-gradient(to right, var(--tw-gradient-stops)) 1`,
                       borderImageSlice: 1,
@@ -116,7 +118,7 @@ export default function ProjectsPage() {
                     </span>
                   </span>
                 );
-              }
+              },
             )}
           </div>
         </div>
